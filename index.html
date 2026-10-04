@@ -30,12 +30,12 @@ nav button{background:transparent;color:var(--muted);padding:5px 8px;font-size:1
 <body>
 <div id="login" class="login">
   <div class="loginbox">
-    <div class="brand"><div class="building">🏢</div><div class="logo" style="color:#0b3d6e">Condomínio Residencial Janduis</div><div class="sub">Versão 1.0 • Protótipo</div></div>
-    <input id="user" placeholder="Usuário (ex.: Apto 101)">
+    <div class="brand"><div class="building">🏢</div><div class="logo" style="color:#0b3d6e">Condomínio Residencial Janduis</div><div class="sub">Versão 1.1 • Protótipo</div></div>
+    <input id="user" placeholder="Apartamento (ex.: 101)">
     <input id="pass" type="password" placeholder="Senha">
     <button class="full" onclick="entrar()">Entrar</button>
     <button class="full secondary" style="margin-top:9px" onclick="demo()">Entrar no modo demonstração</button>
-    <p class="small" style="text-align:center;margin-top:16px">Nesta primeira versão, os dados são demonstrativos.</p>
+    <p class="small" style="text-align:center;margin-top:16px">Protótipo. Use o número do apartamento e a senha provisória 1234.</p>
   </div>
 </div>
 
@@ -59,7 +59,20 @@ nav button{background:transparent;color:var(--muted);padding:5px 8px;font-size:1
 </div>
 
 <script>
-let role="morador", userName="Morador";
+let role="morador", userName="Morador", apartment="";
+
+// Protótipo: não armazena CPFs no código público.
+// Login provisório: número do apartamento + senha 1234.
+const moradores={
+  "101":"Lucas Vitor",
+  "102":"Rosely Alvarenga",
+  "201":"Paulo Sérgio",
+  "202":"Paulo Borges",
+  "301":"Gabriel Rodrigues",
+  "302":"Marisa Eugenio",
+  "401":"Delduque Caetano",
+  "402":"Lucilene de Fátima"
+};
 
 const data={
 comunicados:[
@@ -72,8 +85,19 @@ docs:["Convenção do Condomínio","Regimento Interno","Prestação de Contas 20
 reservas:["Salão de festas","Churrasqueira"],
 };
 
-function entrar(){const u=document.getElementById('user').value.trim(); userName=u||"Morador"; role=(u.toLowerCase().includes("sindico")||u.toLowerCase().includes("síndico"))?"sindico":"morador"; openApp()}
-function demo(){userName="Apto 101";role="morador";openApp()}
+function entrar(){
+  const u=document.getElementById('user').value.trim().toLowerCase();
+  const pass=document.getElementById('pass').value.trim();
+  if((u==="sindico"||u==="síndico") && pass==="1234"){
+    apartment=""; userName="Lucas"; role="sindico"; openApp(); return;
+  }
+  const apt=u.replace(/[^0-9]/g,"");
+  if(moradores[apt] && pass==="1234"){
+    apartment=apt; userName=moradores[apt]; role="morador"; openApp(); return;
+  }
+  alert("Login inválido. Use o número do apartamento e a senha provisória 1234.");
+}
+function demo(){apartment="101";userName=moradores["101"];role="morador";openApp()}
 function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');home()}
 function home(){
 document.getElementById('roleLabel').textContent=role==="sindico"?"Painel do Síndico":"Área do Morador";
@@ -113,7 +137,7 @@ else if(page==="reservas"){title="Reservas";body=`<div class="list">${data.reser
 else if(page==="documentos"){title="Documentos";body=`<div class="list">${data.docs.map(x=>`<div class="item"><div class="row"><b>📄 ${x}</b><span class="small">PDF</span></div></div>`).join("")}</div>`}
 else if(page==="solicitacoes"){title="Solicitações";body=`<button class="full" onclick="alert('Na próxima etapa: formulário da solicitação.')">+ Nova solicitação</button><div class="section list"><div class="item"><div class="row"><b>Manutenção</b><span class="pill">Em andamento</span></div><div class="small">Solicitação sobre vazamento.</div></div><div class="item"><div class="row"><b>Limpeza</b><span class="pill">Aberta</span></div></div></div>`}
 else if(page==="enquetes"){title="Enquetes";body=`<div class="item"><b>Você é a favor da instalação de câmeras de segurança?</b><p class="small">Participe da decisão do condomínio.</p><button onclick="alert('Voto registrado no protótipo.')">Sim</button> <button class="secondary" onclick="alert('Voto registrado no protótipo.')">Não</button></div>`}
-else if(page==="moradores"){title="Moradores";body=`<div class="list">${["Apto 101","Apto 102","Apto 201","Apto 202","Apto 301","Apto 302","Apto 401","Apto 402"].map((x,i)=>`<div class="item"><div class="row"><b>${x}</b><span class="pill">${i<6?"Ativo":"Ativo"}</span></div><div class="small">Cadastro do morador</div></div>`).join("")}</div>`}
+else if(page==="moradores"){title="Moradores";body=`<div class="list">${Object.entries(moradores).map(([apt,nome])=>`<div class="item"><div class="row"><b>Apto ${apt}</b><span class="pill">Ativo</span></div><div style="margin-top:5px">${nome}</div><div class="small">Login: apartamento ${apt} • senha provisória 1234</div></div>`).join("")}</div>`}
 else if(page==="inadimplencia"){title="Inadimplência";body=`<div class="list"><div class="item"><div class="row"><b>Apto 102</b><span class="pill red">2 meses</span></div><div class="money">R$ 900,00</div><button onclick="alert('Na próxima etapa: mensagem de cobrança.')">Enviar cobrança</button></div><div class="item"><div class="row"><b>Apto 201</b><span class="pill red">1 mês</span></div><div class="money">R$ 450,00</div></div></div>`}
 else if(page==="prestacao"){title="Prestação de contas";body=`<div class="item"><div class="row"><b>Setembro/2026</b><span class="pill">Publicado</span></div><p class="small">Receitas: R$ 4.080,00<br>Despesas: R$ 2.220,00<br>Saldo: R$ 1.860,00</p><button onclick="alert('Na próxima etapa: relatório completo em PDF.')">Ver relatório</button></div>`}
 else {title="Mais";body=`<div class="list"><div class="item">⚙️ Configurações</div><div class="item">🔔 Preferências de notificações</div><div class="item">ℹ️ Sobre o aplicativo</div><div class="item"><button class="secondary" onclick="location.reload()">Sair</button></div></div>`}
