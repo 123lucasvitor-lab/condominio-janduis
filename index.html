@@ -1,147 +1,39 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b3d6e">
-<link rel="manifest" href="manifest.json">
-<title>Condomínio Janduis</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b3d6e"><link rel="manifest" href="manifest.json"><title>Condomínio Janduis</title>
 <style>
-:root{--blue:#0b3d6e;--blue2:#1167b1;--bg:#f4f7fb;--text:#17324d;--muted:#718096;--green:#198754;--red:#dc3545;--card:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
-.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:80px}
-header{background:linear-gradient(145deg,var(--blue),#0d5b9d);color:#fff;padding:26px 20px 22px;border-radius:0 0 24px 24px}
-.logo{font-weight:800;font-size:22px;letter-spacing:.2px}.sub{opacity:.85;font-size:13px;margin-top:4px}
-h1{font-size:24px;margin:18px 0 4px}h2{font-size:18px;margin:0 0 12px}
-.screen{padding:18px 16px}.hidden{display:none!important}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 3px 12px #16324d12}
-.tile{min-height:112px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}.icon{font-size:26px}.tile b{font-size:14px}.tile span{font-size:12px;color:var(--muted)}
-.list{display:flex;flex-direction:column;gap:10px}.item{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px #16324d0c}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{font-size:12px;color:var(--muted)}.money{font-weight:800;font-size:18px}.pill{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;background:#e9f7ef;color:var(--green)}.pill.red{background:#fdebec;color:var(--red)}
-button{border:0;border-radius:12px;padding:12px 14px;background:var(--blue2);color:white;font-weight:700;font-size:14px;cursor:pointer}.secondary{background:#e8f0f8;color:var(--blue)}.full{width:100%}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fff;border-top:1px solid #e3eaf1;display:flex;justify-content:space-around;padding:10px 6px calc(10px + env(safe-area-inset-bottom));z-index:5}
-nav button{background:transparent;color:var(--muted);padding:5px 8px;font-size:11px}nav button.active{color:var(--blue)}
-.back{background:transparent;color:var(--blue);padding:0 0 14px;font-size:13px}.notice{border-left:4px solid var(--blue2)}.balance{font-size:28px;font-weight:850;color:var(--blue)}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(160deg,#0b3d6e,#eef5fb)}
-.loginbox{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:28px;box-shadow:0 15px 50px #0003}.brand{text-align:center;margin-bottom:25px}.building{font-size:50px}.login input{width:100%;padding:14px;margin:7px 0;border:1px solid #d8e0e8;border-radius:12px;font-size:15px}
-.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:14px;background:#fff}.stat strong{font-size:20px;display:block;margin-top:5px}
-.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.section{margin-top:22px}
-</style>
-</head>
-<body>
-<div id="login" class="login">
-  <div class="loginbox">
-    <div class="brand"><div class="building">🏢</div><div class="logo" style="color:#0b3d6e">Condomínio Residencial Janduis</div><div class="sub">Versão 1.1 • Protótipo</div></div>
-    <input id="user" placeholder="Apartamento (ex.: 101)">
-    <input id="pass" type="password" placeholder="Senha">
-    <button class="full" onclick="entrar()">Entrar</button>
-    <button class="full secondary" style="margin-top:9px" onclick="demo()">Entrar no modo demonstração</button>
-    <p class="small" style="text-align:center;margin-top:16px">Protótipo. Use o número do apartamento e a senha provisória 1234.</p>
-  </div>
-</div>
-
-<div id="app" class="app hidden">
-<header>
-  <div class="logo">🏢 Condomínio Residencial Janduis</div>
-  <div class="sub" id="roleLabel">Área do Morador</div>
-  <h1 id="welcome">Olá!</h1>
-  <div class="sub">Tudo do condomínio na palma da mão.</div>
-</header>
-
-<main id="content" class="screen"></main>
-
-<nav>
-  <button onclick="home()">🏠<br>Início</button>
-  <button onclick="show('financeiro')">💰<br>Financeiro</button>
-  <button onclick="show('reservas')">📅<br>Reservas</button>
-  <button onclick="show('documentos')">📄<br>Documentos</button>
-  <button onclick="show('mais')">☰<br>Mais</button>
-</nav>
-</div>
-
+:root{--blue:#0b3d6e;--blue2:#1167b1;--bg:#f4f7fb;--text:#17324d;--muted:#718096;--green:#198754;--red:#dc3545;--orange:#b7791f;--card:#fff;--line:#e3eaf1}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}button,input,select,textarea{font:inherit}.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:82px}header{background:linear-gradient(145deg,var(--blue),#0d5b9d);color:#fff;padding:26px 20px 22px;border-radius:0 0 24px 24px}.logo{font-weight:800;font-size:22px}.sub{opacity:.88;font-size:13px;margin-top:4px}h1{font-size:24px;margin:18px 0 4px}h2{font-size:18px;margin:0 0 12px}.screen{padding:18px 16px}.hidden{display:none!important}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 3px 12px #16324d12}.tile{min-height:112px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}.icon{font-size:26px}.tile b{font-size:14px}.tile span{font-size:12px;color:var(--muted)}.list{display:flex;flex-direction:column;gap:10px}.item{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px #16324d0c}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{font-size:12px;color:var(--muted)}.money{font-weight:800;font-size:18px}.pill{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;background:#e9f7ef;color:var(--green)}.pill.red{background:#fdebec;color:var(--red)}.pill.orange{background:#fff5db;color:var(--orange)}button{border:0;border-radius:12px;padding:12px 14px;background:var(--blue2);color:white;font-weight:700;font-size:14px;cursor:pointer}.secondary{background:#e8f0f8;color:var(--blue)}.danger{background:#dc3545}.full{width:100%}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 6px calc(10px + env(safe-area-inset-bottom));z-index:5}nav button{background:transparent;color:var(--muted);padding:5px 8px;font-size:11px}nav button.active{color:var(--blue)}.back{background:transparent;color:var(--blue);padding:0 0 14px;font-size:13px}.notice{border-left:4px solid var(--blue2)}.balance{font-size:28px;font-weight:850;color:var(--blue)}.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(160deg,#0b3d6e,#eef5fb)}.loginbox{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:28px;box-shadow:0 15px 50px #0003}.brand{text-align:center;margin-bottom:25px}.building{font-size:50px}.login input,.form input,.form select,.form textarea{width:100%;padding:13px;margin:6px 0;border:1px solid #d8e0e8;border-radius:12px;font-size:15px;background:#fff}.form textarea{min-height:90px;resize:vertical}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:14px;background:#fff;box-shadow:0 2px 8px #16324d0c}.stat strong{font-size:20px;display:block;margin-top:5px}.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.section{margin-top:22px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1;min-width:120px}.empty{padding:20px;text-align:center;color:var(--muted);background:#fff;border-radius:14px}.tablelike{display:grid;gap:8px}.mini{font-size:13px}.check{display:flex;align-items:center;gap:8px;margin:8px 0}.check input{width:auto}.noticeForm{margin-bottom:12px}
+</style></head><body>
+<div id="login" class="login"><div class="loginbox"><div class="brand"><div class="building">🏢</div><div class="logo" style="color:#0b3d6e">Condomínio Residencial Janduis</div><div class="sub">Versão 1.2 • Protótipo</div></div><input id="user" placeholder="Apartamento (ex.: 101)"><input id="pass" type="password" placeholder="Senha"><button class="full" onclick="entrar()">Entrar</button><button class="full secondary" style="margin-top:9px" onclick="demo()">Entrar no modo demonstração</button><p class="small" style="text-align:center;margin-top:16px">Protótipo. Acesso do síndico: sindico / 1234.</p></div></div>
+<div id="app" class="app hidden"><header><div class="logo">🏢 Condomínio Residencial Janduis</div><div class="sub" id="roleLabel">Área do Morador</div><h1 id="welcome">Olá!</h1><div class="sub">Tudo do condomínio na palma da mão.</div></header><main id="content" class="screen"></main><nav><button onclick="home()">🏠<br>Início</button><button onclick="show('financeiro')">💰<br>Financeiro</button><button onclick="show('reservas')">📅<br>Reservas</button><button onclick="show('documentos')">📄<br>Documentos</button><button onclick="show('mais')">☰<br>Mais</button></nav></div>
 <script>
-let role="morador", userName="Morador", apartment="";
-
-// Protótipo: não armazena CPFs no código público.
-// Login provisório: número do apartamento + senha 1234.
-const moradores={
-  "101":"Lucas Vitor",
-  "102":"Rosely Alvarenga",
-  "201":"Paulo Sérgio",
-  "202":"Paulo Borges",
-  "301":"Gabriel Rodrigues",
-  "302":"Marisa Eugenio",
-  "401":"Delduque Caetano",
-  "402":"Lucilene de Fátima"
-};
-
-const data={
-comunicados:[
-["Manutenção do elevador","Hoje, 10h30 • Serviço de manutenção preventiva.","Importante"],
-["Reunião do Conselho","Será realizada reunião do conselho administrativo.","Geral"],
-["Festa do condomínio","Convite para a festa junina do condomínio.","Geral"],
-["Aviso de encomenda","Você tem uma encomenda aguardando retirada.","Aviso"]
-],
-docs:["Convenção do Condomínio","Regimento Interno","Prestação de Contas 2025","Balancete Setembro/2026"],
-reservas:["Salão de festas","Churrasqueira"],
-};
-
-function entrar(){
-  const u=document.getElementById('user').value.trim().toLowerCase();
-  const pass=document.getElementById('pass').value.trim();
-  if((u==="sindico"||u==="síndico") && pass==="1234"){
-    apartment=""; userName="Lucas"; role="sindico"; openApp(); return;
-  }
-  const apt=u.replace(/[^0-9]/g,"");
-  if(moradores[apt] && pass==="1234"){
-    apartment=apt; userName=moradores[apt]; role="morador"; openApp(); return;
-  }
-  alert("Login inválido. Use o número do apartamento e a senha provisória 1234.");
-}
-function demo(){apartment="101";userName=moradores["101"];role="morador";openApp()}
-function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');home()}
-function home(){
-document.getElementById('roleLabel').textContent=role==="sindico"?"Painel do Síndico":"Área do Morador";
-document.getElementById('welcome').textContent=role==="sindico"?"Olá, Lucas!":"Olá, "+userName+"!";
-if(role==="sindico") renderSindico(); else renderMorador();
-}
-function renderMorador(){
-content.innerHTML=`<div class="grid">
-<div class="card tile" onclick="show('comunicados')"><div class="icon">📢</div><b>Comunicados</b><span>Veja os avisos do condomínio</span></div>
-<div class="card tile" onclick="show('financeiro')"><div class="icon">💰</div><b>Taxas e pagamentos</b><span>Boletos e histórico</span></div>
-<div class="card tile" onclick="show('reservas')"><div class="icon">📅</div><b>Reservas</b><span>Áreas comuns</span></div>
-<div class="card tile" onclick="show('solicitacoes')"><div class="icon">🛠️</div><b>Solicitações</b><span>Fale com o síndico</span></div>
-<div class="card tile" onclick="show('documentos')"><div class="icon">📄</div><b>Documentos</b><span>Convenção e regimento</span></div>
-<div class="card tile" onclick="show('enquetes')"><div class="icon">🗳️</div><b>Enquetes</b><span>Participe das decisões</span></div>
-</div>
-<div class="section"><h2>Últimos avisos</h2><div class="list">${data.comunicados.slice(0,3).map(x=>`<div class="item notice"><div class="row"><b>${x[0]}</b><span class="pill">${x[2]}</span></div><div class="small" style="margin-top:6px">${x[1]}</div></div>`).join("")}</div></div>`;
-}
-function renderSindico(){
-content.innerHTML=`<div class="statgrid">
-<div class="stat">Moradores<strong>8</strong></div><div class="stat">Inadimplentes<strong style="color:#dc3545">2</strong></div>
-<div class="stat">Receitas<strong>R$ 4.080</strong></div><div class="stat">Despesas<strong>R$ 2.220</strong></div>
-</div>
-<div class="section"><h2>Administração</h2><div class="grid">
-<div class="card tile" onclick="show('moradores')"><div class="icon">👥</div><b>Moradores</b><span>Cadastros e apartamentos</span></div>
-<div class="card tile" onclick="show('financeiro')"><div class="icon">📊</div><b>Financeiro</b><span>Receitas, despesas e saldo</span></div>
-<div class="card tile" onclick="show('comunicados')"><div class="icon">📢</div><b>Comunicados</b><span>Publicar avisos</span></div>
-<div class="card tile" onclick="show('inadimplencia')"><div class="icon">⚠️</div><b>Inadimplência</b><span>Acompanhar pendências</span></div>
-<div class="card tile" onclick="show('reservas')"><div class="icon">📅</div><b>Reservas</b><span>Administrar áreas</span></div>
-<div class="card tile" onclick="show('prestacao')"><div class="icon">📑</div><b>Prestação de contas</b><span>Publicar balancetes</span></div>
-</div></div>`;
-}
-function show(page){
-let title="",body="";
-if(page==="comunicados"){title="Comunicados";body=`<div class="list">${data.comunicados.map(x=>`<div class="item notice"><div class="row"><b>${x[0]}</b><span class="pill">${x[2]}</span></div><p class="small">${x[1]}</p></div>`).join("")}</div>${role==="sindico"?'<button class="full" style="margin-top:12px" onclick="alert(\'Na próxima etapa: formulário para publicar comunicado.\')">+ Novo comunicado</button>':''}`}
-else if(page==="financeiro"){title="Financeiro";body=`<div class="card"><div class="small">Saldo atual</div><div class="balance">R$ 1.860,00</div><div class="small">Receitas R$ 4.080,00 • Despesas R$ 2.220,00</div></div><div class="section list"><div class="item"><div class="row"><b>Taxa condominial — Setembro/2026</b><span class="pill">Em aberto</span></div><div class="money">R$ 450,00</div><button class="secondary" onclick="alert('Na próxima etapa: emissão/visualização do boleto.')">Ver 2ª via</button></div><div class="item"><b>Histórico de pagamentos</b><p class="small">Agosto/2026 — R$ 450,00 — Pago</p><p class="small">Julho/2026 — R$ 450,00 — Pago</p></div></div>`}
-else if(page==="reservas"){title="Reservas";body=`<div class="list">${data.reservas.map(x=>`<div class="item"><div class="row"><b>${x}</b><span class="pill">Disponível</span></div><p class="small">Escolha a data e o horário desejado.</p><button onclick="alert('Na próxima etapa: calendário e confirmação da reserva.')">Reservar</button></div>`).join("")}</div>`}
-else if(page==="documentos"){title="Documentos";body=`<div class="list">${data.docs.map(x=>`<div class="item"><div class="row"><b>📄 ${x}</b><span class="small">PDF</span></div></div>`).join("")}</div>`}
-else if(page==="solicitacoes"){title="Solicitações";body=`<button class="full" onclick="alert('Na próxima etapa: formulário da solicitação.')">+ Nova solicitação</button><div class="section list"><div class="item"><div class="row"><b>Manutenção</b><span class="pill">Em andamento</span></div><div class="small">Solicitação sobre vazamento.</div></div><div class="item"><div class="row"><b>Limpeza</b><span class="pill">Aberta</span></div></div></div>`}
-else if(page==="enquetes"){title="Enquetes";body=`<div class="item"><b>Você é a favor da instalação de câmeras de segurança?</b><p class="small">Participe da decisão do condomínio.</p><button onclick="alert('Voto registrado no protótipo.')">Sim</button> <button class="secondary" onclick="alert('Voto registrado no protótipo.')">Não</button></div>`}
-else if(page==="moradores"){title="Moradores";body=`<div class="list">${Object.entries(moradores).map(([apt,nome])=>`<div class="item"><div class="row"><b>Apto ${apt}</b><span class="pill">Ativo</span></div><div style="margin-top:5px">${nome}</div><div class="small">Login: apartamento ${apt} • senha provisória 1234</div></div>`).join("")}</div>`}
-else if(page==="inadimplencia"){title="Inadimplência";body=`<div class="list"><div class="item"><div class="row"><b>Apto 102</b><span class="pill red">2 meses</span></div><div class="money">R$ 900,00</div><button onclick="alert('Na próxima etapa: mensagem de cobrança.')">Enviar cobrança</button></div><div class="item"><div class="row"><b>Apto 201</b><span class="pill red">1 mês</span></div><div class="money">R$ 450,00</div></div></div>`}
-else if(page==="prestacao"){title="Prestação de contas";body=`<div class="item"><div class="row"><b>Setembro/2026</b><span class="pill">Publicado</span></div><p class="small">Receitas: R$ 4.080,00<br>Despesas: R$ 2.220,00<br>Saldo: R$ 1.860,00</p><button onclick="alert('Na próxima etapa: relatório completo em PDF.')">Ver relatório</button></div>`}
-else {title="Mais";body=`<div class="list"><div class="item">⚙️ Configurações</div><div class="item">🔔 Preferências de notificações</div><div class="item">ℹ️ Sobre o aplicativo</div><div class="item"><button class="secondary" onclick="location.reload()">Sair</button></div></div>`}
-content.innerHTML=`<button class="back" onclick="home()">← Voltar</button><div class="topline"><h2>${title}</h2></div>${body}`;
-}
-</script>
-</body></html>
+let role='morador',userName='Morador',apartment='';
+const moradores={'101':'Lucas Vitor','102':'Rosely Alvarenga','201':'Paulo Sérgio','202':'Paulo Borges','301':'Gabriel Rodrigues','302':'Marisa Eugenio','401':'Delduque Caetano','402':'Lucilene de Fátima'};
+const base={comunicados:[['Manutenção do elevador','Hoje, 10h30 • Serviço de manutenção preventiva.','Importante'],['Reunião do Conselho','Será realizada reunião do conselho administrativo.','Geral'],['Festa do condomínio','Convite para a festa do condomínio.','Geral']],docs:['Convenção do Condomínio','Regimento Interno','Prestação de Contas 2025','Balancete Setembro/2026'],reservas:['Salão de festas','Churrasqueira']};
+const store={get(k,f){try{return JSON.parse(localStorage.getItem('janduis_'+k))??f}catch(e){return f}},set(k,v){localStorage.setItem('janduis_'+k,JSON.stringify(v))}};
+function getData(){return {comunicados:store.get('comunicados',base.comunicados),docs:store.get('docs',base.docs),reservas:store.get('reservas',base.reservas),solicitacoes:store.get('solicitacoes',[]),enquetes:store.get('enquetes',[]),pagamentos:store.get('pagamentos',[])} }
+function entrar(){const u=document.getElementById('user').value.trim().toLowerCase(),p=document.getElementById('pass').value.trim();if((u==='sindico'||u==='síndico')&&p==='1234'){role='sindico';apartment='';userName='Lucas';openApp();return}const apt=u.replace(/[^0-9]/g,'');if(moradores[apt]&&p==='1234'){role='morador';apartment=apt;userName=moradores[apt];openApp();return}alert('Login inválido. Use o número do apartamento e a senha 1234.')}function demo(){role='morador';apartment='101';userName=moradores['101'];openApp()}function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');home()}function home(){document.getElementById('roleLabel').textContent=role==='sindico'?'Painel do Síndico':'Área do Morador';document.getElementById('welcome').textContent=role==='sindico'?'Olá, Lucas!':'Olá, '+userName+'!';role==='sindico'?renderSindico():renderMorador()}
+function renderMorador(){const d=getData();content.innerHTML=`<div class="grid"><div class="card tile" onclick="show('comunicados')"><div class="icon">📢</div><b>Comunicados</b><span>Veja os avisos do condomínio</span></div><div class="card tile" onclick="show('financeiro')"><div class="icon">💰</div><b>Taxas e pagamentos</b><span>Boletos e histórico</span></div><div class="card tile" onclick="show('reservas')"><div class="icon">📅</div><b>Reservas</b><span>Áreas comuns</span></div><div class="card tile" onclick="show('solicitacoes')"><div class="icon">🛠️</div><b>Solicitações</b><span>Fale com o síndico</span></div><div class="card tile" onclick="show('documentos')"><div class="icon">📄</div><b>Documentos</b><span>Convenção e regimento</span></div><div class="card tile" onclick="show('enquetes')"><div class="icon">🗳️</div><b>Enquetes</b><span>Participe das decisões</span></div></div><div class="section"><h2>Últimos avisos</h2><div class="list">${d.comunicados.slice(0,3).map(x=>`<div class="item notice"><div class="row"><b>${x[0]}</b><span class="pill">${x[2]}</span></div><div class="small" style="margin-top:6px">${x[1]}</div></div>`).join('')}</div></div>`}
+function renderSindico(){const d=getData(),pend=d.pagamentos.filter(x=>x.status==='Pendente').length;content.innerHTML=`<div class="statgrid"><div class="stat">Moradores<strong>8</strong></div><div class="stat">Pendências<strong style="color:#dc3545">${pend}</strong></div><div class="stat">Comunicados<strong>${d.comunicados.length}</strong></div><div class="stat">Solicitações<strong>${d.solicitacoes.length}</strong></div></div><div class="section"><h2>Administração</h2><div class="grid"><div class="card tile" onclick="show('moradores')"><div class="icon">👥</div><b>Moradores</b><span>Cadastros e apartamentos</span></div><div class="card tile" onclick="show('financeiro')"><div class="icon">📊</div><b>Financeiro</b><span>Taxas e pagamentos</span></div><div class="card tile" onclick="show('comunicados')"><div class="icon">📢</div><b>Comunicados</b><span>Publicar avisos</span></div><div class="card tile" onclick="show('inadimplencia')"><div class="icon">⚠️</div><b>Inadimplência</b><span>Acompanhar pendências</span></div><div class="card tile" onclick="show('reservas')"><div class="icon">📅</div><b>Reservas</b><span>Administrar áreas</span></div><div class="card tile" onclick="show('solicitacoes')"><div class="icon">🔧</div><b>Solicitações</b><span>Atender moradores</span></div><div class="card tile" onclick="show('documentos')"><div class="icon">📄</div><b>Documentos</b><span>Publicar documentos</span></div><div class="card tile" onclick="show('enquetes')"><div class="icon">🗳️</div><b>Enquetes</b><span>Criar votação</span></div></div></div>`}
+function show(page){const d=getData();let title='',body='';
+if(page==='comunicados'){title='Comunicados';body=`${role==='sindico'?`<div class="card form noticeForm"><h2>Novo comunicado</h2><input id="ct" placeholder="Título"><input id="cd" placeholder="Mensagem"><select id="cc"><option>Geral</option><option>Importante</option><option>Aviso</option></select><button class="full" onclick="addComunicado()">Publicar comunicado</button></div>`:''}<div class="list">${d.comunicados.map((x,i)=>`<div class="item notice"><div class="row"><b>${x[0]}</b><span class="pill">${x[2]}</span></div><p class="small">${x[1]}</p>${role==='sindico'?`<button class="danger" onclick="removeItem('comunicados',${i})">Excluir</button>`:''}</div>`).join('')}</div>`}
+else if(page==='moradores'){title='Moradores';body=`<div class="list">${Object.entries(moradores).map(([apt,nome])=>`<div class="item"><div class="row"><b>Apto ${apt}</b><span class="pill">Ativo</span></div><div style="margin-top:5px">${nome}</div><div class="small">Login: ${apt} • senha provisória 1234</div></div>`).join('')}</div><div class="section item"><b>Segurança</b><p class="small">Esta versão é um protótipo e não deve ser usada para guardar dados reais. O CPF não é exibido nem armazenado aqui.</p></div>`}
+else if(page==='financeiro'){if(role==='sindico'){body=`<div class="card form"><h2>Lançar taxa</h2><select id="pa">${Object.keys(moradores).map(a=>`<option value="${a}">Apto ${a} — ${moradores[a]}</option>`).join('')}</select><input id="pm" type="number" step="0.01" placeholder="Valor (R$)"><input id="pc" placeholder="Competência (ex.: Outubro/2026)"><select id="ps"><option>Pendente</option><option>Pago</option></select><button class="full" onclick="addPagamento()">Lançar</button></div><div class="section list">${d.pagamentos.length?d.pagamentos.map((p,i)=>`<div class="item"><div class="row"><b>Apto ${p.apt}</b><span class="pill ${p.status==='Pendente'?'red':''}">${p.status}</span></div><div class="small">${p.comp}</div><div class="money">R$ ${Number(p.valor).toFixed(2).replace('.',',')}</div><button class="secondary" onclick="togglePag(${i})">${p.status==='Pendente'?'Marcar pago':'Marcar pendente'}</button></div>`).join(''):'<div class="empty">Nenhuma taxa lançada ainda.</div>'}</div>`}else{const mine=d.pagamentos.filter(p=>p.apt===apartment);body=`<div class="card"><div class="small">Apartamento ${apartment}</div><div class="balance">Taxas</div></div><div class="section list">${mine.length?mine.map(p=>`<div class="item"><div class="row"><b>${p.comp}</b><span class="pill ${p.status==='Pendente'?'red':''}">${p.status}</span></div><div class="money">R$ ${Number(p.valor).toFixed(2).replace('.',',')}</div></div>`).join(''):'<div class="empty">Nenhuma taxa lançada para seu apartamento.</div>'}</div>`}}
+else if(page==='inadimplencia'){title='Inadimplência';const p=d.pagamentos.filter(x=>x.status==='Pendente');body=`${p.length?`<div class="list">${p.map(x=>`<div class="item"><div class="row"><b>Apto ${x.apt}</b><span class="pill red">Pendente</span></div><div class="small">${x.comp}</div><div class="money">R$ ${Number(x.valor).toFixed(2).replace('.',',')}</div><button onclick="alert('Cobrança preparada para o Apto ${x.apt}. Nesta versão é apenas demonstração.')">Enviar cobrança</button></div>`).join('')}</div>`:'<div class="empty">Nenhuma pendência cadastrada.</div>'}`}
+else if(page==='reservas'){title='Reservas';body=`<div class="list">${d.reservas.map(x=>`<div class="item"><div class="row"><b>${x}</b><span class="pill">Disponível</span></div><p class="small">Escolha a data e o horário desejado.</p><button onclick="alert('Reserva registrada no protótipo.')">Reservar</button></div>`).join('')}</div>`}
+else if(page==='documentos'){title='Documentos';body=`${role==='sindico'?`<div class="card form"><input id="dn" placeholder="Nome do documento"><button class="full" onclick="addDoc()">Adicionar documento</button></div>`:''}<div class="section list">${d.docs.map((x,i)=>`<div class="item"><div class="row"><b>📄 ${x}</b><span class="small">PDF</span></div>${role==='sindico'?`<button class="danger" onclick="removeItem('docs',${i})">Excluir</button>`:''}</div>`).join('')}</div>`}
+else if(page==='solicitacoes'){title='Solicitações';if(role==='morador')body=`<div class="card form"><h2>Nova solicitação</h2><input id="st" placeholder="Assunto"><textarea id="sm" placeholder="Descreva o problema"></textarea><button class="full" onclick="addSolicitacao()">Enviar ao síndico</button></div>`;else body=`<div class="list">${d.solicitacoes.length?d.solicitacoes.map((s,i)=>`<div class="item"><div class="row"><b>Apto ${s.apt}</b><span class="pill ${s.status==='Atendida'?'':'orange'}">${s.status}</span></div><b>${s.titulo}</b><p class="small">${s.msg}</p><button onclick="atender(${i})">${s.status==='Atendida'?'Reabrir':'Marcar atendida'}</button></div>`).join(''):'<div class="empty">Nenhuma solicitação recebida.</div>'}</div>`}
+else if(page==='enquetes'){title='Enquetes';if(role==='sindico')body=`<div class="card form"><input id="eq" placeholder="Pergunta da enquete"><button class="full" onclick="addEnquete()">Criar enquete</button></div>`;body+=`<div class="section list">${d.enquetes.length?d.enquetes.map((e,i)=>`<div class="item"><b>${e.pergunta}</b><p class="small">Sim: ${e.sim||0} • Não: ${e.nao||0}</p>${role==='morador'?`<button onclick="votar(${i},'sim')">Sim</button> <button class="secondary" onclick="votar(${i},'nao')">Não</button>`:''}</div>`).join(''):'<div class="empty">Nenhuma enquete criada.</div>'}</div>`}
+else if(page==='mais'){title='Mais';body=`<div class="list"><div class="item">⚙️ Configurações</div><div class="item">🔔 Notificações</div><div class="item">ℹ️ Versão 1.2 — protótipo</div><div class="item"><button class="secondary full" onclick="location.reload()">Sair</button></div></div>`}
+content.innerHTML=`<button class="back" onclick="home()">← Voltar</button><div class="topline"><h2>${title}</h2></div>${body}`}
+function addComunicado(){const t=ct.value.trim(),m=cd.value.trim(),c=cc.value;if(!t||!m)return alert('Preencha título e mensagem.');const d=getData();d.comunicados.unshift([t,m,c]);store.set('comunicados',d.comunicados);show('comunicados')}
+function addPagamento(){const d=getData();d.pagamentos.push({apt:pa.value,valor:pm.value,comp:pc.value||'Sem competência',status:ps.value});store.set('pagamentos',d.pagamentos);show('financeiro')}
+function togglePag(i){const d=getData();d.pagamentos[i].status=d.pagamentos[i].status==='Pendente'?'Pago':'Pendente';store.set('pagamentos',d.pagamentos);show('financeiro')}
+function addDoc(){const n=dn.value.trim();if(!n)return;const d=getData();d.docs.push(n);store.set('docs',d.docs);show('documentos')}
+function addSolicitacao(){const t=st.value.trim(),m=sm.value.trim();if(!t||!m)return alert('Preencha assunto e descrição.');const d=getData();d.solicitacoes.unshift({apt:apartment,titulo:t,msg:m,status:'Aberta'});store.set('solicitacoes',d.solicitacoes);alert('Solicitação enviada ao síndico.');home()}
+function atender(i){const d=getData();d.solicitacoes[i].status=d.solicitacoes[i].status==='Atendida'?'Aberta':'Atendida';store.set('solicitacoes',d.solicitacoes);show('solicitacoes')}
+function addEnquete(){const q=eq.value.trim();if(!q)return;const d=getData();d.enquetes.unshift({pergunta:q,sim:0,nao:0});store.set('enquetes',d.enquetes);show('enquetes')}
+function votar(i,v){const d=getData();d.enquetes[i][v]++;store.set('enquetes',d.enquetes);show('enquetes')}
+function removeItem(k,i){if(!confirm('Excluir este item?'))return;const d=getData();d[k].splice(i,1);store.set(k,d[k]);show(k==='docs'?'documentos':'comunicados')}
+</script></body></html>
